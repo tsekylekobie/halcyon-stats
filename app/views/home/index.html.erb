@@ -1,0 +1,13 @@
+<h1>VG Stats</h1>
+<h4>Search for a player.</h4>
+<%= form_tag(region_player_path(id: :username, region_id: :shard_id), {method: "get", :class => "form-inline"}) do %>
+	<%= text_field_tag(:username, nil, {:class => "form-control", :placeholder => "Username"}) %>
+  	<%= select_tag("shard_id", options_for_select([['North America', 'na'], ['Europe', 'eu'], ['South America', 'sa'], ['East Asia', 'ea'], ['Southeast Asia', 'sg']]), {:class => "form-control"}) %>
+	<%= submit_tag("Search", {:class => "btn btn-default"}) %>
+<% end %>
+
+<% if @notFound %>
+	<div class = "alert alert-danger" role = "alert" id = "notFound">
+		<strong>Oops!</strong> Player not found.
+	</div>
+<% end %>

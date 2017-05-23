@@ -1,0 +1,27 @@
+<%= button_to "Home Page", { :action => "index", :controller => "home" }, {:method => :get, :class => "btn btn-default"} %>
+
+<div class = "container col-md-3" id = "left-col">
+	<div class = "container-fluid" id = "player-notes">
+		<h2 class = "section-header"><%= @name %></h2>
+		<%= @server %><br>
+		<%= "Level #{@level}" %><br>
+		<%= @skill_tier %><br>
+		<%= @karma_text %><br>
+	</div>
+	<div class = "container-fluid" id = "player-stats">
+		<h4 class = "section-header">Stats</h4>
+		<%= "#{@total_games} games played" %><br>
+		<%= "Win percentage: #{@win_percentage}%" %><br>
+	</div>
+</div>
+<div class = "container col-md-5" id = "mid-col">
+</div>
+<div class = "container col-md-4" id = "right-col">
+	<h4 class = "section-header">Recent Matches</h4>
+	<div class = "container-fluid">
+		<div>
+			<%= @recent_matches %>
+		</div>
+	</div>
+	<!-- container-fluid boxes for each match, limit 5 shown-->
+</div>
