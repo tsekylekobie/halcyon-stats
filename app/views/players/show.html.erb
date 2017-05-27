@@ -1,27 +1,36 @@
-<%= button_to "Home Page", { :action => "index", :controller => "home" }, {:method => :get, :class => "btn btn-default"} %>
+<%= button_to 'Home Page', { :action => 'index', :controller => 'home' }, {:method => :get, :class => 'btn btn-default'} %>
 
-<div class = "container col-md-3" id = "left-col">
-	<div class = "container-fluid" id = "player-notes">
-		<h2 class = "section-header"><%= @name %></h2>
-		<%= @server %><br>
-		<%= "Level #{@level}" %><br>
-		<%= @skill_tier %><br>
-		<%= @karma_text %><br>
+<div class = 'container col-md-4' id = 'left-col'>
+	<div class = 'container-fluid' id = 'player-notes'>
+		<h2 class = 'section-header'>
+			<%= @player.ign %>	
+		</h2>
+		<%= image_tag("skill_tiers/#{@player.skillTier.downcase.gsub(' ', '-')}.png", :size => 150, :id => 'skill-tier-img') %>
+		<%= "Level #{@player.level}" %><br>
+		<%= @player.skillTier %><br>
+		<%= @player.karmaLevel %><br>
 	</div>
-	<div class = "container-fluid" id = "player-stats">
-		<h4 class = "section-header">Stats</h4>
-		<%= "#{@total_games} games played" %><br>
-		<%= "Win percentage: #{@win_percentage}%" %><br>
+	<div class = 'container-fluid' id = 'player-stats'>
+		<h4 class = 'section-header'>Stats</h4>
+		<%= "#{@player.played} games played" %><br>
+		<%= "Win percentage: #{@player.winPercent}" %><br>
 	</div>
 </div>
-<div class = "container col-md-5" id = "mid-col">
+<div class = 'container col-md-4' id = 'mid-col'>
 </div>
-<div class = "container col-md-4" id = "right-col">
-	<h4 class = "section-header">Recent Matches</h4>
-	<div class = "container-fluid">
-		<div>
-			<%= @recent_matches %>
+<div class = 'container col-md-4' id = 'right-col'>
+	<h4 class = 'section-header'>
+		Recent Matches
+	</h4>
+	<% @recent_matches.each { |m| %>
+		<div class = 'container-fluid match-preview'>
+			<div class = 'container col-md-3'>
+				
+			</div>
+			<div class = 'container col-md-9'>
+				<%= m.gameMode.capitalize %>
+			</div>
 		</div>
-	</div>
-	<!-- container-fluid boxes for each match, limit 5 shown-->
+	<% } %>
+	<%= button_to 'Show more', nil, {:class => 'btn btn-default'} %>
 </div>
