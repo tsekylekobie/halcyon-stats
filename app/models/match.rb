@@ -1,5 +1,5 @@
 class Match
-	attr_reader :createdAt, :duration, :gameMode, :rosterA, :rosterB
+	attr_reader :id, :createdAt, :duration, :gameMode, :patchVersion, :region, :teams
 
 	def initialize(data, lib) 
 	# `data` is primary match data, `lib` is library of additional details about match

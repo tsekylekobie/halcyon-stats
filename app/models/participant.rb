@@ -1,11 +1,12 @@
 class Participant
 	attr_reader :hero, :skinKey, :kills, :deaths, :assists, :items, :farm, :player
 
+	@@names = JSON.parse(File.read('lib/assets/pretty.json'))
 
 	def initialize(id, lib)
 
 		participantOS = lib.find { |p| p.type == 'participant' && p.id == id }
-		@hero = participantOS.attributes.actor
+		@hero = @@names[participantOS.attributes.actor]
 		@skinKey = participantOS.attributes.stats.skinKey
 		@kills = participantOS.attributes.stats.kills
 		@deaths = participantOS.attributes.stats.deaths
