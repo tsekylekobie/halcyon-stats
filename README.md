@@ -1,4 +1,4 @@
-# VG Stats 1.0
+# VG Stats (Work in Progress)
 
 ## Overview
 

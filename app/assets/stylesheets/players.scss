@@ -1,3 +1,7 @@
+.section-header{
+    border-bottom: thin solid #b8b8b8;
+}
+
 #left-col, #right-col {
 	text-align: left;
 }
@@ -12,6 +16,10 @@
 	margin: 5px;
 }
 
-.section-header{
-    border-bottom: thin solid #b8b8b8;
-  }
+.item-img {
+	width: 15%;
+}
+
+.hero-profile-img {
+	width: 100%;
+}

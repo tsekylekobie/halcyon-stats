@@ -1,0 +1,25 @@
+<h4 class = 'section-header'>
+	Recent Matches
+</h4>
+<% @recent_matches.each { |m| %>
+	<div class = 'container-fluid match-preview'>
+		<% m.teams.each { |t| %>
+			<% t.participants.each { |p| %>
+				<% if p.player.id == @player.id %>
+					<% @player_hero = p %>
+				<% end %>
+			<% } %>
+		<% } %>
+
+		<div class = 'container col-md-3'>
+			<%= image_tag("heroes/#{@player_hero.hero.downcase}.png", :class => "hero-profile-img", :id => @player_hero.hero) %>
+		</div>
+		<div class = 'container col-md-9'>
+			<p><b><%= $names[m.gameMode] %></b> | <i><%= distance_of_time_in_words_to_now(m.createdAt) %> ago</i></p>
+			<% @player_hero.items.each { |i| %>
+				<%= image_tag("items/#{i.downcase.gsub(' ', '-')}.png", :class => "item-img", :id => i) %>
+			<% } %>
+		</div>
+	</div>
+<% } %>
+<%= button_to 'Show more', nil, {:class => 'btn btn-default'} %>
