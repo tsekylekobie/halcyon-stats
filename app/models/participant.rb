@@ -11,7 +11,13 @@ class Participant
 		@kills = participantOS.attributes.stats.kills
 		@deaths = participantOS.attributes.stats.deaths
 		@assists = participantOS.attributes.stats.assists
-		@items = participantOS.attributes.stats.items
+		@items = participantOS.attributes.stats.items.map { |i|
+			if @@names.key?(i)
+				@@names[i]
+			else # If item not found in dictionary, return self
+				i
+			end
+		}
 		@farm = participantOS.attributes.stats.farm
 		id = participantOS.relationships.player.data.id
 		@player = Player.new(id, lib)

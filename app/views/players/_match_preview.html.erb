@@ -1,0 +1,43 @@
+<h4 class='section-header'>
+	Recent Matches
+	<span style="color:gray; font-size:12px">Click a match for more details</span>
+</h4>
+<div id='match-body'>
+	<% @recent_matches.each { |m| %>
+		<div class='container-fluid match-preview' id=<%=m.id%>>
+			<% m.teams.each { |t| %>
+				<% t.participants.each { |p| %>
+					<% if p.player.id == @player.id %>
+						<% @player_hero=p %>
+						<% @player_team=t %>
+					<% end %>
+				<% } %>
+			<% } %>
+
+			<div class='container col-md-3'>
+				<%= image_tag("heroes/#{@player_hero.hero.downcase}.png", :class => "hero-profile-img", :id => @player_hero.hero) %>
+				<p style='text-align:center; margin:0px'><strong><%= "#{@player_hero.kills} / #{@player_hero.deaths} / #{@player_hero.assists}" %></strong></p>
+			</div>
+			<div class='container col-md-9'>
+				<p>
+					<b><%= $names[m.gameMode] %></b> | 
+					<span class='match-result' id=<%= m.id %>>
+						<% if @player_team.won %>
+							Victory
+						<% else %>
+							Defeat
+						<% end %>
+					</span> | 
+					<i><%= distance_of_time_in_words_to_now(m.createdAt) %> ago</i>
+				</p>
+				<% @player_hero.items.each { |i| %>
+					<div class='container col-md-2 item-img-wrapper'>
+						<%= image_tag("items/#{i.downcase.gsub(' ', '-')}.png", :class => "item-img", "data-toggle" => "tooltip", "data-placement" => "top", "title" => i) %>
+					</div>
+				<% } %>
+			</div>
+		</div>
+	<% } %>
+	<input type="button" class="btn btn-default" id="show-more-btn" value="Show More">
+	<p id="no-more-text" style="display:none;">No more matches!</p>
+</div>

@@ -1,5 +1,5 @@
 class Player
-	attr_reader :id, :ign, :region, :karmaLevel, :level, :played, :skillTier, :winPercent
+	attr_reader :id, :ign, :region, :karmaLevel, :level, :played, :skillTier, :wins, :winPercent
 
 	def initialize(id, lib)
 		playerOS = lib.find { |p| p.type == 'player' && p.id == id }
@@ -10,7 +10,8 @@ class Player
 		@level = playerOS.attributes.stats.level
 		@played = playerOS.attributes.stats.played
 		@skillTier = calculateSkillTier(playerOS.attributes.stats.skillTier)
-		@winPercent = (100.0 * playerOS.attributes.stats.wins / @played).round(2).to_s + '%'
+		@wins = playerOS.attributes.stats.wins
+		@winPercent = (100.0 * @wins / @played).round(2).to_s + '%'
 	end
 
 	def calculateKarma(k)

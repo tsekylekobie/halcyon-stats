@@ -2,24 +2,50 @@
     border-bottom: thin solid #b8b8b8;
 }
 
-#left-col, #right-col {
+#left-col, #mid-col, #right-col {
 	text-align: left;
+}
+
+#match-body {
+	height: 500px;
+	overflow-y: scroll;
+	text-align: center;
+}
+
+.tooltip-inner  {
+    white-space: nowrap;
+}
+
+#player-ign {
+	font-size: 2em;
+	float: left;
 }
 
 #skill-tier-img {
 	float: right;
+	width: 35%;
 }
 
 .match-preview {
+	text-align: left;
 	border: thin solid #b8b8b8;
 	padding: 5px;
 	margin: 5px;
 }
 
+.item-img-wrapper, .hero-profile-wrapper {
+	padding: 0px;
+}
+
 .item-img {
-	width: 15%;
+	width: 90%;
 }
 
 .hero-profile-img {
 	width: 100%;
+	top: 50%;
+}
+
+.score {
+	text-align: center;
 }

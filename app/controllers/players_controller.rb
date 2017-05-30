@@ -19,9 +19,9 @@ class PlayersController < ApplicationController
 		end
 	end
 
-	def getRecentMatches(id, offset = 0, numMatches = 5)
-		tStart = Time.new(2017, 05).utc.iso8601
-		req = @db.matches({"filter[playerIds]" => id, "filter[createdAt-start]" => tStart, "page[offset]" => offset, "page[limit]" => numMatches, "sort" => "-createdAt"})
+	def getRecentMatches(id)
+		tStart = Time.new(2017, 01).utc.iso8601
+		req = @db.matches({"filter[playerIds]" => id, "filter[createdAt-start]" => tStart, "sort" => "-createdAt"})
 		jsonToMatchObject(JSON.parse(req.raw.body, object_class: OpenStruct))
 	end
 end

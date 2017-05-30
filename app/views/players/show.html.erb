@@ -1,19 +1,11 @@
 <%= button_to 'Home Page', { :action => 'index', :controller => 'home' }, {:method => :get, :class => 'btn btn-default'} %>
 
-<div class = 'container col-md-4' id = 'left-col'>
-	<div class = 'container-fluid' id = 'player-notes'>
-		<h2 class = 'section-header'>
-			<%= @player.ign %>	
-		</h2>
-		<%= image_tag("skill_tiers/#{@player.skillTier.downcase.gsub(' ', '-')}.png", :size => 150, :id => 'skill-tier-img') %>
-		<%= "Level #{@player.level}" %><br>
-		<%= @player.skillTier %><br>
-		<%= @player.karmaLevel %><br>
-	</div>
-</div>
-<div class = 'container col-md-4' id = 'mid-col'>
+<div class = 'container col-md-3' id = 'left-col'>
 	<%= render "player_details" %>
 </div>
-<div class = 'container col-md-4' id = 'right-col'>
-	<%= render "match_details" %>
+<div class = 'container col-md-4' id = 'mid-col'>
+	<%= render "match_preview" %>
+</div>
+<div class='container col-md-5' id='right-col'>
+	<%= render 'match_details' %>
 </div>

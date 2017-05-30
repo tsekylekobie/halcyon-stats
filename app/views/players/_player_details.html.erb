@@ -1,8 +1,16 @@
+<div class = 'container-fluid' id = 'player-notes'>
+	<%= image_tag("skill_tiers/#{@player.skillTier.downcase.gsub(' ', '-')}.png", :id => 'skill-tier-img') %>
+	<br>
+	<h3 id="player-ign"><%= @player.ign %></h3>
+</div>
 <div class = 'container-fluid' id = 'player-stats'>
 	<h4 class='section-header'>Stats</h4>
 	
 	<canvas id='winPercentage'></canvas>
-	<h4><%= "Win percentage: #{@player.winPercent}" %></h4>
+	<h4 style="text-align:center">
+		Record: <span id='wins'><%= @player.wins %></span>-<span id='losses'><%= @player.played - @player.wins %></span>
+		<%= "(#{@player.winPercent})" %>	
+	</h4>
 
 
 </div>
