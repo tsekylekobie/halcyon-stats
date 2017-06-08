@@ -14,9 +14,9 @@
 				<% } %>
 			<% } %>
 
-			<div class='container col-md-3'>
+			<div class='container col-md-3' style='padding:8px'>
 				<%= image_tag("heroes/#{@player_hero.hero.downcase}.png", :class => "hero-profile-img", :id => @player_hero.hero) %>
-				<p style='text-align:center; margin:0px'><strong><%= "#{@player_hero.kills} / #{@player_hero.deaths} / #{@player_hero.assists}" %></strong></p>
+				<p style='text-align:center; margin:0px;'><strong><%= "#{@player_hero.kills} / #{@player_hero.deaths} / #{@player_hero.assists}" %></strong></p>
 			</div>
 			<div class='container col-md-9'>
 				<p>

@@ -1,16 +1,61 @@
-<div class = 'container-fluid' id = 'player-notes'>
+<!-- Javascript variables -->
+<%= javascript_tag do %>
+	window.wins = <%= @player.wins %>;
+	window.losses = <%= @player.played - @player.wins %>;
+	window.sideRecord = <%= raw @stats[:sideRecord].to_json %>;
+	window.heroesPlayed = <%= raw @stats[:heroesPlayed].to_json %>;
+<% end %>
+
+<div class="container col-md-4" id="player-notes">
 	<%= image_tag("skill_tiers/#{@player.skillTier.downcase.gsub(' ', '-')}.png", :id => 'skill-tier-img') %>
 	<br>
 	<h3 id="player-ign"><%= @player.ign %></h3>
+	<p>KDA: <%= ((@stats[:kills] + @stats[:assists]) / @stats[:deaths]).round(2) %></p>
+	<p><%= "#{@stats[:kills].round()}K / #{@stats[:deaths].round()}D / #{@stats[:assists].round()}A"%></p>
 </div>
-<div class = 'container-fluid' id = 'player-stats'>
-	<h4 class='section-header'>Stats</h4>
-	
-	<canvas id='winPercentage'></canvas>
-	<h4 style="text-align:center">
-		Record: <span id='wins'><%= @player.wins %></span>-<span id='losses'><%= @player.played - @player.wins %></span>
-		<%= "(#{@player.winPercent})" %>	
+
+<div class="container col-md-8" id="player-stats">
+	<h4 class="section-header">
+		Stats
+		<span style="color:gray; font-size:12px">From the 50 most recent games</span>
 	</h4>
+	<div class="container-fluid" id="win-stats">
+		<div class="container col-md-4">
+			<h4 style="text-align:center">Overall</h4>
+			<canvas id="winPercentage"></canvas>
+			<h4 style="text-align:center">
+				<%= @player.winPercent %>	
+			</h4>
+		</div>
+		<div class="container col-md-4">
+			<h4 style="text-align:center">Left Side</h4>
+			<canvas id="leftPercentage"></canvas>
+			<h4 style="text-align:center">
+				<% left = @stats[:sideRecord]["left/blue"] %>
+				<%= calcWinPercentage(left[:wins], left[:losses], 2) %>	
+			</h4>
+		</div>
+		<div class="container col-md-4">
+			<h4 style="text-align:center">Right Side</h4>
+			<canvas id="rightPercentage"></canvas>
+			<h4 style="text-align:center">
+				<% right = @stats[:sideRecord]["right/red"] %>
+				<%= calcWinPercentage(right[:wins], right[:losses], 2) %>	
+			</h4>
+		</div>
+	</div>
 
-
+	<div class="container-fluid" id="hero-stats">
+		<h4>Favorite Heroes</h4>
+		<% [1,2,3].each do |i| %>
+			<div class="container col-md-4">
+				<% hero = @stats[:heroesPlayed][i] %>
+				<div class="container col-md-6">
+					<%= image_tag("heroes/#{hero[0].downcase}.png", :class => "hero-profile-img", :id => hero[0]) %>
+				</div>
+				<h4><%= "#{hero[1][:wins]}-#{hero[1][:losses]}" %></h4>
+				<h4><%= calcWinPercentage(hero[1][:wins], hero[1][:losses]) %></h4>
+			</div>
+		<% end %>
+	</div>
 </div>

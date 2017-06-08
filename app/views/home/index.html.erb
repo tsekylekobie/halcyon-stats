@@ -1,4 +1,6 @@
-<h1>VG Stats</h1>
+<%= render "shared/navigation" %>
+
+<h1>Halcyon Stats</h1>
 <h4>Search for a player.</h4>
 <%= form_tag(region_player_path(id: :username, region_id: :shard_id), {method: "get", :class => "form-inline"}) do %>
 	<%= text_field_tag(:username, nil, {:class => "form-control", :placeholder => "Username"}) %>

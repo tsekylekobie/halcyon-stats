@@ -1,27 +1,46 @@
 <% @recent_matches.each { |m| %>
 	<div class='container-fluid match-details' id=<%=m.id%> style='display:none'>
-		<% m.teams.each { |t| %>
-			<div class='container col-md-2 score'>
-				<%= t.heroKills %><br><%= t.side %>
-			</div>
-			<div class='container col-md-10' id='roster-wrapper'>
-				<% t.participants.each { |p| %>
-					<div class='container-fluid' style="padding:5px">
-						<div class='container col-md-2 hero-profile-wrapper'>
-							<%= image_tag("heroes/#{p.hero.downcase}.png", :class => "hero-profile-img", :id => p.hero) %>
-							<p style='text-align:center; margin:0px'><strong><%= "#{@player_hero.kills} / #{@player_hero.deaths} / #{@player_hero.assists}" %></strong></p>
-						</div>
-						<div class='container col-md-10'>
-							<h4><%= p.player.ign %></h4>
-							<% p.items.each { |i| %>
-								<div class='container col-md-2 item-img-wrapper'>
-									<%= image_tag("items/#{i.downcase.gsub(' ', '-')}.png", :class => "item-img", "data-toggle" => "tooltip", "data-placement" => "top", "title" => i) %>
-								</div>
-							<% } %>
-						</div>
+		<div class='container-fluid' id='match-result'>
+			<h1><%= "#{m.teams[0].heroKills} - #{m.teams[1].heroKills}" %></h1>
+			<p><%= m.duration %></p>
+		</div>
+		<!-- Blue Team -->
+		<div class='container col-md-6' id='roster-wrapper'>
+			<% m.teams[0].participants.each { |p| %>
+				<div class='container-fluid' style="padding:5px">
+					<div class='container col-md-2 hero-profile-wrapper'>
+						<%= image_tag("heroes/#{p.hero.downcase}.png", :class => "hero-profile-img", :id => p.hero) %>
+						<p style='text-align:center; margin:0px'><strong><%= "#{p.kills} / #{p.deaths} / #{p.assists}" %></strong></p>
 					</div>
-				<% } %>
-			</div>
-		<% } %>
+					<div class='container col-md-10'>
+						<h4><%= p.player.ign %></h4>
+						<% p.items.each { |i| %>
+							<div class='container col-md-2 item-img-wrapper'>
+								<%= image_tag("items/#{i.downcase.gsub(' ', '-')}.png", :class => "item-img", "data-toggle" => "tooltip", "data-placement" => "top", "title" => i) %>
+							</div>
+						<% } %>
+					</div>
+				</div>
+			<% } %>
+		</div>
+		<!-- Red Team -->
+		<div class='container col-md-6' id='roster-wrapper'>
+			<% m.teams[1].participants.each { |p| %>
+				<div class='container-fluid' style="padding:5px">
+					<div class='container col-md-2 hero-profile-wrapper'>
+						<%= image_tag("heroes/#{p.hero.downcase}.png", :class => "hero-profile-img", :id => p.hero) %>
+						<p style='text-align:center; margin:0px'><strong><%= "#{p.kills} / #{p.deaths} / #{p.assists}" %></strong></p>
+					</div>
+					<div class='container col-md-10'>
+						<h4><%= p.player.ign %></h4>
+						<% p.items.each { |i| %>
+							<div class='container col-md-2 item-img-wrapper'>
+								<%= image_tag("items/#{i.downcase.gsub(' ', '-')}.png", :class => "item-img", "data-toggle" => "tooltip", "data-placement" => "top", "title" => i) %>
+							</div>
+						<% } %>
+					</div>
+				</div>
+			<% } %>
+		</div>
 	</div>
 <% } %>

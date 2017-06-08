@@ -7,18 +7,19 @@ class Participant
 
 		participantOS = lib.find { |p| p.type == 'participant' && p.id == id }
 		@hero = @@names[participantOS.attributes.actor]
-		@skinKey = participantOS.attributes.stats.skinKey
-		@kills = participantOS.attributes.stats.kills
-		@deaths = participantOS.attributes.stats.deaths
-		@assists = participantOS.attributes.stats.assists
-		@items = participantOS.attributes.stats.items.map { |i|
+		stats = participantOS.attributes.stats
+		@skinKey = stats.skinKey
+		@kills = stats.kills
+		@deaths = stats.deaths
+		@assists = stats.assists
+		@items = stats.items.map { |i|
 			if @@names.key?(i)
 				@@names[i]
 			else # If item not found in dictionary, return self
 				i
 			end
 		}
-		@farm = participantOS.attributes.stats.farm
+		@farm = stats.farm
 		id = participantOS.relationships.player.data.id
 		@player = Player.new(id, lib)
 	end

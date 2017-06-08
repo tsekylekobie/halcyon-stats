@@ -1,6 +1,13 @@
+
 $(function() {
 	// Enable tooltips
 	$('[data-toggle="tooltip"]').tooltip()
+
+	// Enable tab functions
+	$('#myTab a').click(function (e) {
+  		e.preventDefault()
+  		$(this).tab('show')
+	})
 
 	// Highlight match-preview boxes depending on match result
 	$('.match-preview').each(function() {
@@ -19,39 +26,68 @@ $(function() {
 	$('.match-preview').click(function() { displayMatchDetails(this.id); });
 
 
-    // Draw win loss graph
-    var ctx = document.getElementById("winPercentage").getContext('2d');
+    // Draw win loss chart
+    var ctx = document.getElementById("winPercentage").getContext("2d");
     var data = [
 	    {
-	        value: $('span#wins').text(),
+	        value: wins,
 	        color: "#37c33c",
 	        highlight: "#43d648",
 	        label: "Wins"
 	    },
 	    {
-	        value: $('span#losses').text(),
+	        value: losses,
 	        color:"#F7464A",
 	        highlight: "#FF5A5E",
 	        label: "Losses"
 	    }
 	]
-
-    drawDonutChart(ctx, data);
-});
-
-function drawDonutChart(ctx, data) {
-    var option = {
+	var option = {
     	responsive: true,
     };
-
 	new Chart(ctx).Doughnut(data, option);
-}
+	console.log(sideRecord);
+	// Draw win loss chart per side
+	ctx = document.getElementById("leftPercentage").getContext("2d");
+    data = [
+	    {
+	        value: sideRecord["left/blue"]["wins"],
+	        color: "#37c33c",
+	        highlight: "#43d648",
+	        label: "Wins"
+	    },
+	    {
+	        value: sideRecord["left/blue"]["losses"],
+	        color:"#F7464A",
+	        highlight: "#FF5A5E",
+	        label: "Losses"
+	    }
+	]
+	new Chart(ctx).Doughnut(data, option);
+
+	ctx = document.getElementById("rightPercentage").getContext("2d");
+    data = [
+	    {
+	        value: sideRecord["right/red"]["wins"],
+	        color: "#37c33c",
+	        highlight: "#43d648",
+	        label: "Wins"
+	    },
+	    {
+	        value: sideRecord["right/red"]["wins"],
+	        color:"#F7464A",
+	        highlight: "#FF5A5E",
+	        label: "Losses"
+	    }
+	]
+	new Chart(ctx).Doughnut(data, option);
+});
 
 // Displays (5) matches when called
 function displayMatchPreviews() {
 	var matches = $('.match-preview').filter(function() { return this.style.display == 'none'});
 	if (matches.length > 0) {
-		for (var i = 0; i < 5; i++) {
+		for (var i = 0; i < Math.min(matches.length, 5); i++) {
 			matches[i].style.display = "block";
 		}
 	} else {

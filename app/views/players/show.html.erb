@@ -1,11 +1,23 @@
-<%= button_to 'Home Page', { :action => 'index', :controller => 'home' }, {:method => :get, :class => 'btn btn-default'} %>
+<%= render "shared/navigation" %>
 
-<div class = 'container col-md-3' id = 'left-col'>
-	<%= render "player_details" %>
-</div>
-<div class = 'container col-md-4' id = 'mid-col'>
-	<%= render "match_preview" %>
-</div>
-<div class='container col-md-5' id='right-col'>
-	<%= render 'match_details' %>
+<ul class="nav nav-tabs nav-justified" role="tablist">
+	<li id="player-tab" class="active">
+		<a href="#player" data-toggle="tab" role="tab">Player Stats</a>
+	</li>
+	<li id="match-tab">
+		<a href="#match" data-toggle="tab" role="tab">Match History</a>
+	</li>
+</ul>
+<div class="tab-content">
+	<div class="tab-pane fade in active" id="player" role="tabpanel">
+		<%= render "player_details" %>
+	</div>
+	<div class="tab-pane fade" id="match" role="tabpanel">
+		<div class = "container col-md-4">
+			<%= render "match_preview" %>
+		</div>
+		<div class="container col-md-8">
+			<%= render "match_details" %>
+		</div>
+	</div>
 </div>
