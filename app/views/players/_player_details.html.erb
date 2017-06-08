@@ -7,7 +7,9 @@
 <% end %>
 
 <div class="container col-md-4" id="player-notes">
-	<%= image_tag("skill_tiers/#{@player.skillTier.downcase.gsub(' ', '-')}.png", :id => 'skill-tier-img') %>
+	<div class='container col-md-4' style='float:right'>
+		<%= image_tag("skill_tiers/#{@player.skillTier.downcase.gsub(' ', '-')}.png", :class => 'skill-tier-img', :id => '@player.skillTier') %>
+	</div>
 	<br>
 	<h3 id="player-ign"><%= @player.ign %></h3>
 	<p>KDA: <%= ((@stats[:kills] + @stats[:assists]) / @stats[:deaths]).round(2) %></p>
@@ -17,7 +19,7 @@
 <div class="container col-md-8" id="player-stats">
 	<h4 class="section-header">
 		Stats
-		<span style="color:gray; font-size:12px">From the 50 most recent games</span>
+		<span style="color:gray; font-size:12px">From the 100 most recent games</span>
 	</h4>
 	<div class="container-fluid" id="win-stats">
 		<div class="container col-md-4">

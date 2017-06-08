@@ -17,11 +17,6 @@
 	float: left;
 }
 
-#skill-tier-img {
-	float: right;
-	width: 35%;
-}
-
 .match-preview {
 	text-align: left;
 	border: thin solid #b8b8b8;
@@ -37,7 +32,7 @@
 	width: 90%;
 }
 
-.hero-profile-img {
+.hero-profile-img, .skill-tier-img {
 	width: 100%;
 	top: 50%;
 }

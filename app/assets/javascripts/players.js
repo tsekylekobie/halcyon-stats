@@ -74,7 +74,7 @@ $(function() {
 	        label: "Wins"
 	    },
 	    {
-	        value: sideRecord["right/red"]["wins"],
+	        value: sideRecord["right/red"]["losses"],
 	        color:"#F7464A",
 	        highlight: "#FF5A5E",
 	        label: "Losses"
