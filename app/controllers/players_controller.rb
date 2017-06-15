@@ -15,7 +15,7 @@ class PlayersController < ApplicationController
 			redirect_to root_path(notFound: true)
 		else
 			@player = Player.new(player.data[0].id, player.data)
-			@recent_matches = collectMatches(100, "ranked", @player.id)
+			@recent_matches = collectMatches("ranked", @player.id)
 			@stats = collectPlayerStats(@player.ign, @recent_matches)
 		end
 	end
