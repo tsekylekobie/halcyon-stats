@@ -1,4 +1,4 @@
-<% @recent_matches.each { |m| %>
+<% @matches.each { |m| %>
 	<div class='container-fluid match-details' id=<%=m.id%> style='display:none'>
 		<div class='container-fluid' id='match-result'>
 			<h1><%= "#{m.teams[0].heroKills} - #{m.teams[1].heroKills}" %></h1>

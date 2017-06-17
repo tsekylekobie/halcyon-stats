@@ -1,0 +1,62 @@
+<%= form_for(roster) do |f| %>
+  <% if roster.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(roster.errors.count, "error") %> prohibited this roster from being saved:</h2>
+
+      <ul>
+      <% roster.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id %>
+    <%= f.text_field :id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :won %>
+    <%= f.check_box :won %>
+  </div>
+
+  <div class="field">
+    <%= f.label :left %>
+    <%= f.check_box :left %>
+  </div>
+
+  <div class="field">
+    <%= f.label :score %>
+    <%= f.text_field :score %>
+  </div>
+
+  <div class="field">
+    <%= f.label :kraken %>
+    <%= f.text_field :kraken %>
+  </div>
+
+  <div class="field">
+    <%= f.label :aces %>
+    <%= f.text_field :aces %>
+  </div>
+
+  <div class="field">
+    <%= f.label :turretsKilled %>
+    <%= f.text_field :turretsKilled %>
+  </div>
+
+  <div class="field">
+    <%= f.label :turretsRemaining %>
+    <%= f.text_field :turretsRemaining %>
+  </div>
+
+  <div class="field">
+    <%= f.label :gold %>
+    <%= f.text_field :gold %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

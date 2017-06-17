@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Hero:</strong>
+  <%= @participant.hero %>
+</p>
+
+<p>
+  <strong>Skin:</strong>
+  <%= @participant.skin %>
+</p>
+
+<p>
+  <strong>Kills:</strong>
+  <%= @participant.kills %>
+</p>
+
+<p>
+  <strong>Deaths:</strong>
+  <%= @participant.deaths %>
+</p>
+
+<p>
+  <strong>Assists:</strong>
+  <%= @participant.assists %>
+</p>
+
+<p>
+  <strong>Farm:</strong>
+  <%= @participant.farm %>
+</p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @participant.id %>
+</p>
+
+<%= link_to 'Edit', edit_participant_path(@participant) %> |
+<%= link_to 'Back', participants_path %>

@@ -1,0 +1,52 @@
+<%= form_for(player) do |f| %>
+  <% if player.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(player.errors.count, "error") %> prohibited this player from being saved:</h2>
+
+      <ul>
+      <% player.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :ign %>
+    <%= f.text_field :ign %>
+  </div>
+
+  <div class="field">
+    <%= f.label :region %>
+    <%= f.text_field :region %>
+  </div>
+
+  <div class="field">
+    <%= f.label :karma %>
+    <%= f.text_field :karma %>
+  </div>
+
+  <div class="field">
+    <%= f.label :level %>
+    <%= f.text_field :level %>
+  </div>
+
+  <div class="field">
+    <%= f.label :played %>
+    <%= f.text_field :played %>
+  </div>
+
+  <div class="field">
+    <%= f.label :skillTier %>
+    <%= f.text_field :skillTier %>
+  </div>
+
+  <div class="field">
+    <%= f.label :wins %>
+    <%= f.text_field :wins %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

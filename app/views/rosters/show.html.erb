@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @roster.id %>
+</p>
+
+<p>
+  <strong>Won:</strong>
+  <%= @roster.won %>
+</p>
+
+<p>
+  <strong>Left:</strong>
+  <%= @roster.left %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @roster.score %>
+</p>
+
+<p>
+  <strong>Kraken:</strong>
+  <%= @roster.kraken %>
+</p>
+
+<p>
+  <strong>Aces:</strong>
+  <%= @roster.aces %>
+</p>
+
+<p>
+  <strong>Turretskilled:</strong>
+  <%= @roster.turretsKilled %>
+</p>
+
+<p>
+  <strong>Turretsremaining:</strong>
+  <%= @roster.turretsRemaining %>
+</p>
+
+<p>
+  <strong>Gold:</strong>
+  <%= @roster.gold %>
+</p>
+
+<%= link_to 'Edit', edit_roster_path(@roster) %> |
+<%= link_to 'Back', rosters_path %>

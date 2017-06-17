@@ -3,7 +3,7 @@
 	<span style="color:gray; font-size:12px">Click a match for more details</span>
 </h4>
 <div id='match-body'>
-	<% @recent_matches.each { |m| %>
+	<% @matches.each { |m| %>
 		<div class='container-fluid match-preview' id=<%=m.id%>>
 			<% m.teams.each { |t| %>
 				<% t.participants.each { |p| %>
