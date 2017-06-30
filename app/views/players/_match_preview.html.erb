@@ -5,11 +5,11 @@
 <div id='match-body'>
 	<% @matches.each { |m| %>
 		<div class='container-fluid match-preview' id=<%=m.id%>>
-			<% m.teams.each { |t| %>
-				<% t.participants.each { |p| %>
+			<% m.rosters.each { |r| %>
+				<% r.participants.each { |p| %>
 					<% if p.player.id == @player.id %>
 						<% @player_hero=p %>
-						<% @player_team=t %>
+						<% @player_team=r %>
 					<% end %>
 				<% } %>
 			<% } %>
@@ -20,7 +20,7 @@
 			</div>
 			<div class='container col-md-9'>
 				<p>
-					<b><%= $names[m.gameMode] %></b> | 
+					<b><%= $NAMES[m.gameMode] %></b> | 
 					<span class='match-result' id=<%= m.id %>>
 						<% if @player_team.won %>
 							Victory
@@ -28,11 +28,11 @@
 							Defeat
 						<% end %>
 					</span> | 
-					<i><%= distance_of_time_in_words_to_now(m.createdAt) %> ago</i>
+					<i><%= distance_of_time_in_words_to_now(m.createdTimestamp) %> ago</i>
 				</p>
 				<% @player_hero.items.each { |i| %>
 					<div class='container col-md-2 item-img-wrapper'>
-						<%= image_tag("items/#{i.downcase.gsub(' ', '-')}.png", :class => "item-img", "data-toggle" => "tooltip", "data-placement" => "top", "title" => i) %>
+						<%= image_tag("items/#{i.name.downcase.gsub(' ', '-')}.png", :class => "item-img", "data-toggle" => "tooltip", "data-placement" => "top", "title" => i.name) %>
 					</div>
 				<% } %>
 			</div>
