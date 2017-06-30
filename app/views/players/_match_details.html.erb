@@ -1,7 +1,7 @@
 <% @matches.each { |m| %>
 	<div class='container-fluid match-details' id=<%=m.id%> style='display:none'>
 		<div class='container-fluid match-overview'>
-			<h2><%= "#{m.rosters[0].score} - #{m.rosters[1].score}" %></h2>
+			<h2><span class="blue-score"><%= m.rosters[0].score %></span> - <span class="red-score"><%= m.rosters[1].score %></span></h2>
 			<%= convertSecondsToMinutes(m.duration) %>
 		</div>
 

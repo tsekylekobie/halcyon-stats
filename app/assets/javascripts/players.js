@@ -9,11 +9,11 @@ $(function() {
 	})
 
 	// Highlight match-preview boxes depending on match result
-	$('.match-preview').each(function() {
+	$('.match-title-bar').each(function() {
 		if ($('#' + this.id + '.match-result').text().trim() == "Victory") {
-			this.style.borderColor = '#37c33c';
+			this.style.backgroundColor = '#37c33c';
 		} else {
-			this.style.borderColor = '#F7464A';
+			this.style.backgroundColor = '#F7464A';
 		}
 	})
 
@@ -22,7 +22,11 @@ $(function() {
 	displayMatchPreviews();
 	$('#show-more-btn').click(displayMatchPreviews);
 	// Same for match details
-	$('.match-preview').click(function() { displayMatchDetails(this.id); });
+	$('.match-preview').click(function() {
+		displayMatchDetails(this.id);
+		$(".match-preview").map(function() {this.style.backgroundColor = "#F2F2F2"});
+		this.style.backgroundColor = "#ABABAB";
+	});
 
 
     // Draw win loss chart
@@ -126,7 +130,16 @@ $(function() {
       		xAxes: [{
       			barPercentage: .75
       		}]
-      	}
+      	},
+      	tooltips: {
+            enabled: true,
+            mode: 'single',
+            callbacks: {
+                label: function(tooltipItems, data) { 
+                    return tooltipItems.yLabel + 'k';
+                }
+            }
+        },
 	}
 	var option2 = {
 		responsive: false,

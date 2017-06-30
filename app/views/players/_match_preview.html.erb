@@ -4,7 +4,7 @@
 </h4>
 <div id='match-body'>
 	<% @matches.each { |m| %>
-		<div class='container-fluid match-preview' id=<%=m.id%>>
+		<div class='container-fluid match-preview' style="padding:0px;" id=<%=m.id%>>
 			<% m.rosters.each { |r| %>
 				<% r.participants.each { |p| %>
 					<% if p.player.id == @player.id %>
@@ -14,25 +14,24 @@
 				<% } %>
 			<% } %>
 
+			<div class='container-fluid match-title-bar' id=<%=m.id%>>
+				<b><%= $NAMES[m.gameMode] %></b> | <i><%= distance_of_time_in_words_to_now(m.createdTimestamp) %> ago</i>
+				<span class="match-result" style="display: none;" id=<%= m.id %>>
+					<% if @player_team.won %>
+					Victory
+					<% else %>
+					Defeat
+					<% end %>
+				</span>
+			</div>
 			<div class='container col-md-3' style='padding:8px'>
-				<%= image_tag("heroes/#{@player_hero.hero.downcase}.png", :class => "hero-profile-img", :id => @player_hero.hero) %>
+				<%= image_tag("heroes/#{@player_hero.hero.downcase}.png", :class => "hero-profile-img", :id => @player_hero.hero, style: "width: 70%; left: 15%; position: relative;") %>
 				<p style='text-align:center; margin:0px;'><strong><%= "#{@player_hero.kills} / #{@player_hero.deaths} / #{@player_hero.assists}" %></strong></p>
 			</div>
 			<div class='container col-md-9'>
-				<p>
-					<b><%= $NAMES[m.gameMode] %></b> | 
-					<span class='match-result' id=<%= m.id %>>
-						<% if @player_team.won %>
-							Victory
-						<% else %>
-							Defeat
-						<% end %>
-					</span> | 
-					<i><%= distance_of_time_in_words_to_now(m.createdTimestamp) %> ago</i>
-				</p>
 				<% @player_hero.items.each { |i| %>
 					<div class='container col-md-2 item-img-wrapper'>
-						<%= image_tag("items/#{i.name.downcase.gsub(' ', '-')}.png", :class => "item-img", "data-toggle" => "tooltip", "data-placement" => "top", "title" => i.name) %>
+						<%= image_tag("items/#{i.name.downcase.gsub(' ', '-')}.png", style: "margin-top: 50%;", :class => "item-img", "data-toggle" => "tooltip", "data-placement" => "top", "title" => i.name) %>
 					</div>
 				<% } %>
 			</div>

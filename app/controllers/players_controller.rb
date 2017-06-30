@@ -114,7 +114,7 @@ class PlayersController < ApplicationController
 
 	def show
 		@player = Player.find_by_ign(params[:ign])
-		@matches = @player.matches
+		@matches = @player.matches.order! 'createdTimestamp DESC'
 		@stats = collectPlayerStats(@player.ign, @matches)
 	end
 
