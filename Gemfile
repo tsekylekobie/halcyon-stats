@@ -50,3 +50,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Custom added gems
 gem 'vainglory-api', '~> 0.0.4'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'rb-readline'
+group :development do
+  gem "rails-erd"
+end

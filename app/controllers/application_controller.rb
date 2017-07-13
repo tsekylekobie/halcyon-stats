@@ -2,5 +2,5 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # Insert your API key here
-  $api_key;
+  $api_key = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJiMTE0ODg3MC0xYjA2LTAxMzUtYzMwNS0wMjQyYWMxMTAwMGEiLCJpc3MiOiJnYW1lbG9ja2VyIiwiaWF0IjoxNDk0Nzg4OTMyLCJwdWIiOiJzZW1jIiwidGl0bGUiOiJ2YWluZ2xvcnkiLCJhcHAiOiJiMTExOTFhMC0xYjA2LTAxMzUtYzMwMy0wMjQyYWMxMTAwMGEiLCJzY29wZSI6ImNvbW11bml0eSIsImxpbWl0IjoxMH0.gEdMuEtDk1IMXxUPw5Hww5xOylXFXogNfgy9FRgIScU'
 end

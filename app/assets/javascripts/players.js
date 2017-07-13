@@ -35,14 +35,8 @@ $(function() {
 	    labels: ["Wins", "Losses"],
 	    datasets: [
 		    {
-		        data: [wins],
-		        backgroundColor: "#37c33c",
-		        label: "Wins"
-		    },
-		    {
-		        data: [losses],
-		        backgroundColor:"#F7464A",
-		        label: "Losses"
+		        data: [wins, losses],
+		        backgroundColor: ["#37c33c", "#F7464A"]
 		    }
 		]
 	}
@@ -74,14 +68,8 @@ $(function() {
     	labels: ["Wins", "Losses"],
     	datasets: [
 		    {
-		        data: [sideRecord["left"]["wins"]],
-		        backgroundColor: "#37c33c",
-		        label: "Wins"
-		    },
-		    {
-		        data: [sideRecord["left"]["losses"]],
-		        backgroundColor:"#F7464A",
-		        label: "Losses"
+		        data: [sideRecord["left"]["wins"], sideRecord["left"]["losses"]],
+		        backgroundColor: ["#37c33c", "#F7464A"]
 		    }
 		]
 	}
@@ -96,14 +84,8 @@ $(function() {
 	    labels: ["Wins", "Losses"],
 	    datasets: [
 		    {
-		        data: [sideRecord["right"]["wins"]],
-		        backgroundColor: "#37c33c",
-		        label: "Wins"
-		    },
-		    {
-		        data: [sideRecord["right"]["losses"]],
-		        backgroundColor:"#F7464A",
-		        label: "Losses"
+		        data: [sideRecord["right"]["wins"], sideRecord["right"]["losses"]],
+		        backgroundColor: ["#37c33c", "#F7464A"]
 		    }
 		]
 	}
@@ -119,14 +101,29 @@ $(function() {
     		display: false
     	},
     	scales: {
-      		yAxes: [{
-         		ticks: {
-                   min: 0,
-                   callback: function(value, index, values) {
-                       return value + 'k';
-                   }
-                }
-      		}],
+      		yAxes: [
+      			{
+    				id: 'y-axis-1',
+    				type: 'linear',
+    				position: 'right',
+    				ticks: {
+    					min: 0,
+    					max: 5
+    				}
+    			},
+      			{
+    				id: 'y-axis-0',
+    				type: 'linear',
+    				position: 'left',
+    				ticks: {
+            	    	min: 0,
+            	    	max: 50,
+            	    	callback: function(value, index, values) {
+            	           return value + 'k';
+            	    	}
+            	    }
+    			}
+      		],
       		xAxes: [{
       			barPercentage: .75
       		}]
@@ -135,78 +132,42 @@ $(function() {
             enabled: true,
             mode: 'single',
             callbacks: {
-                label: function(tooltipItems, data) { 
-                    return tooltipItems.yLabel + 'k';
+                label: function(tooltipItems, data) {
+                	if (!Number.isInteger(tooltipItems.yLabel)) return (tooltipItems.yLabel * 10).toFixed(1) + 'k';
+                	else return tooltipItems.yLabel;
                 }
             }
         },
 	}
-	var option2 = {
-		responsive: false,
-		legend: {
-			display: false
-		},
-   		scales: {
-      		yAxes: [{
-      			position: 'right',
-        		ticks: {
-            		min: 0,
-           			max: 5
-	         	}
-	      	}],
-	      	xAxes: [{
-      			barPercentage: .75
-      		}]
-	   }
-	}
 
-	var headToHead1Array = $(".head-to-head1");
-	var headToHead2Array = $(".head-to-head2");
-	for (var i = 0; i < headToHead1Array.length; i++) {
-		var ctx1 = headToHead1Array[i];
-		var ctx2 = headToHead2Array[i];
-		var rosters = matchRosters.filter(function(obj) { return obj.match_id == headToHead1Array[i].id; });
+	var headToHeadArray = $(".head-to-head");
+	for (var i = 0; i < headToHeadArray.length; i++) {
+		var rosters = matchRosters.filter(function(obj) { return obj.match_id == headToHeadArray[i].id; });
 		var roster1 = rosters.filter(function(obj) { return obj.left == true; })[0];
 		var roster2 = rosters.filter(function(obj) { return obj.left == false; })[0];
-		var data1 = {
-    		labels: ["Total Gold"],
+		var data = {
+    		labels: ["Total Gold", "Kraken Steals", "Aces"],
     		datasets: [
     		    {
     		        label: "Blue Team",
     		        backgroundColor: "#3A96E8",
-    		        data: [(roster1.gold / 1000).toFixed(1)]
+    		        data: [(roster1.gold / 1000 / 50 * 5), // Scale gold to kraken and aces values
+    		        		parseInt(roster1.kraken),
+    		        		parseInt(roster1.aces)]
     		    },
     		    {
     		    	label: "Red Team",
     		    	backgroundColor: "#FE4D4D",
-    		        data: [(roster2.gold / 1000).toFixed(1)]
+    		        data: [(roster2.gold / 1000 / 50 * 5),
+    		        		parseInt(roster2.kraken),
+    		        		parseInt(roster2.aces)]
     		    }
     		]
 		};
-		var data2 = {
-			labels: ["Kraken Steals", "Aces Earned"],
-			datasets: [
-				{
-    		        label: "Blue Team",
-    		        backgroundColor: "#3A96E8",
-    		        data: [parseInt(roster1.kraken), parseInt(roster1.aces)]
-    		    },
-    		    {
-    		    	label: "Red Team",
-    		    	backgroundColor: "#FE4D4D",
-    		        data: [parseInt(roster2.kraken), parseInt(roster2.aces)]
-    		    }
-			]
-		}
-		new Chart(ctx1, {
+		new Chart(headToHeadArray[i], {
 			type: 'bar',
-			data: data1, 
+			data: data, 
 			options: option1
-		});
-		new Chart(ctx2, {
-   			type: 'bar',
-   			data: data2,
-   			options: option2
 		});
 	}
 });

@@ -1,12 +1,3 @@
-<!-- Javascript variables -->
-<%= javascript_tag do %>
-	window.wins = <%= @player.wins %>;
-	window.losses = <%= @player.played - @player.wins %>;
-	window.sideRecord = <%= raw @stats[:sideRecord].to_json %>;
-	window.heroesPlayed = <%= raw @stats[:heroesPlayed].to_json %>;
-	window.matchRosters = <%= raw Roster.joins(match: :players).where('players.id = ?', @player.id).to_json %>;
-<% end %>
-
 <div class="container col-md-4" id="player-notes">
 	<div class='container col-md-4' style='float:right'>
 		<%= image_tag("skill_tiers/#{@player.skillTier}.png", :class => 'skill-tier-img', :id => '@player.skillTier') %>
@@ -15,6 +6,10 @@
 	<h3 id="player-ign"><%= @player.ign %></h3>
 	<p>KDA: <%= ((@stats[:kills] + @stats[:assists]) / @stats[:deaths]).round(2) %></p>
 	<p><%= "#{@stats[:kills].round()}K / #{@stats[:deaths].round()}D / #{@stats[:assists].round()}A"%></p>
+	<p>
+		Average ace: <%= @stats[:averageAce].round(2) %>
+		Average kraken: <%= @stats[:averageKraken].round(2) %>
+	</p>
 </div>
 
 <div class="container col-md-8" id="player-stats">

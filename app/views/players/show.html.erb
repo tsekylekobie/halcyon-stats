@@ -1,5 +1,14 @@
 <%= render "shared/navigation" %>
 
+<!-- Javascript variables -->
+<%= javascript_tag do %>
+	window.wins = <%= @player.wins %>;
+	window.losses = <%= @player.played - @player.wins %>;
+	window.sideRecord = <%= raw @stats[:sideRecord].to_json %>;
+	window.heroesPlayed = <%= raw @stats[:heroesPlayed].to_json %>;
+	window.matchRosters = <%= raw Roster.joins(match: :players).where('players.id = ?', @player.id).to_json %>;
+<% end %>
+
 <ul class="nav nav-tabs nav-justified" role="tablist">
 	<li id="player-tab" class="active">
 		<a href="#player" data-toggle="tab" role="tab">Player Stats</a>
